@@ -1,0 +1,28 @@
+# Essential packages for Ananta training
+# Install with: pip install -r simple_requirements.txt
+
+# Core ML libraries
+torch>=2.0.0
+transformers>=4.35.0
+datasets>=2.14.0
+
+# For efficient training (LoRA)
+peft>=0.6.0
+accelerate>=0.24.0
+
+# For 8-bit quantization (saves memory on RTX 3050)
+bitsandbytes>=0.41.0
+
+# Data handling
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Progress bars (makes training nicer to watch)
+tqdm>=4.65.0
+
+# Optional: For monitoring training (uncomment if you want)
+# wandb>=0.15.0
+# tensorboard>=2.14.0
+
+# For testing and demos
+gradio>=3.45.0 
