@@ -1,0 +1,34 @@
+2025-06-03 18:58:19,325 - INFO - Starting dataset processing pipeline...
+2025-06-03 18:58:19,325 - INFO - Dataset directory found: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0
+2025-06-03 18:58:19,325 - WARNING - Missing difficulty directories: ['train-easy', 'train-medium', 'train-hard', 'extrapolate', 'interpolate']
+2025-06-03 18:58:19,325 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.
+2025-06-03 18:58:59,126 - INFO - Starting dataset processing pipeline...
+2025-06-03 18:58:59,126 - ERROR - Dataset directory not found: mathematics_dataset-v1.0
+2025-06-03 18:58:59,126 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.
+2025-06-03 18:59:10,832 - INFO - Starting dataset processing pipeline...
+2025-06-03 18:59:10,832 - INFO - Dataset directory found: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0
+2025-06-03 18:59:10,832 - WARNING - Missing difficulty directories: ['train-easy', 'train-medium', 'train-hard', 'extrapolate', 'interpolate']
+2025-06-03 18:59:10,832 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.
+2025-06-03 19:02:34,377 - INFO - Starting dataset processing pipeline...
+2025-06-03 19:02:34,377 - INFO - Dataset directory found: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0
+2025-06-03 19:02:34,377 - WARNING - Missing difficulty directories: ['train-easy', 'train-medium', 'train-hard', 'extrapolate', 'interpolate']
+2025-06-03 19:02:34,377 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.
+2025-06-03 19:03:17,134 - INFO - Starting dataset processing pipeline...
+2025-06-03 19:03:17,134 - INFO - Dataset directory found: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0
+2025-06-03 19:03:17,134 - WARNING - Missing difficulty directories: ['extrapolate', 'interpolate', 'train-easy', 'train-medium', 'train-hard']
+2025-06-03 19:03:17,134 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.
+2025-06-03 19:04:56,447 - INFO - Starting dataset processing pipeline...
+2025-06-03 19:04:56,447 - INFO - Dataset directory found: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0
+2025-06-03 19:04:56,447 - WARNING - Missing difficulty directories: ['train-hard', 'train-medium', 'train-easy', 'extrapolate', 'interpolate']
+2025-06-03 19:04:56,447 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.
+2025-06-03 19:06:06,184 - INFO - Starting dataset processing pipeline...
+2025-06-03 19:06:06,184 - INFO - Dataset directory found: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0
+2025-06-03 19:06:06,184 - INFO - Actual directory contents:
+2025-06-03 19:06:06,184 - INFO - Found: mathematics_dataset-v1.0
+2025-06-03 19:06:06,184 - INFO - Checking for directory: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0\train-hard
+2025-06-03 19:06:06,184 - INFO - Checking for directory: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0\train-medium
+2025-06-03 19:06:06,184 - INFO - Checking for directory: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0\train-easy
+2025-06-03 19:06:06,184 - INFO - Checking for directory: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0\extrapolate
+2025-06-03 19:06:06,184 - INFO - Checking for directory: C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0\interpolate
+2025-06-03 19:06:06,184 - WARNING - Missing difficulty directories: ['train-hard', 'train-medium', 'train-easy', 'extrapolate', 'interpolate']
+2025-06-03 19:06:06,184 - ERROR - Processing failed: Dataset validation failed. Please check dataset structure.

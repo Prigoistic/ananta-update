@@ -32,6 +32,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+DEFAULT_DATASET_PATH = r"C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\mathematics_dataset-v1.0\mathematics_dataset-v1.0"
+
 
 class MathDatasetProcessor:
     """
@@ -41,13 +43,16 @@ class MathDatasetProcessor:
     JSON format suitable for instruction-following model training.
     """
     
-    def __init__(self, dataset_dir: str = "mathematics_dataset-v1.0", 
+    def __init__(self, dataset_dir: str = DEFAULT_DATASET_PATH, 
                  output_file: str = "formatted_math_dataset.json"):
         self.dataset_dir = Path(dataset_dir)
         self.output_file = Path(output_file)
         self.difficulty_levels = [
-            "train-easy", "train-medium", "train-hard", 
-            "extrapolate", "interpolate"
+            "train-hard",     # Changed to match exact directory names
+            "train-medium",
+            "train-easy",
+            "extrapolate",
+            "interpolate"
         ]
         
         # Statistics tracking for academic reporting
@@ -61,9 +66,6 @@ class MathDatasetProcessor:
     def validate_dataset_structure(self) -> bool:
         """
         Validates that the dataset directory exists and contains expected structure.
-        
-        Returns:
-            bool: True if dataset structure is valid
         """
         if not self.dataset_dir.exists():
             logger.error(f"Dataset directory not found: {self.dataset_dir}")
@@ -71,10 +73,16 @@ class MathDatasetProcessor:
         
         logger.info(f"Dataset directory found: {self.dataset_dir.absolute()}")
         
+        # List actual contents of directory
+        logger.info("Actual directory contents:")
+        for item in self.dataset_dir.iterdir():
+            logger.info(f"Found: {item.name}")
+        
         # Check for difficulty level subdirectories
         missing_dirs = []
         for difficulty in self.difficulty_levels:
             difficulty_path = self.dataset_dir / difficulty
+            logger.info(f"Checking for directory: {difficulty_path}")
             if not difficulty_path.exists():
                 missing_dirs.append(difficulty)
         
@@ -257,7 +265,7 @@ def main():
     )
     parser.add_argument(
         "--dataset_dir", 
-        default="mathematics_dataset-v1.0",
+        default=DEFAULT_DATASET_PATH,
         help="Path to mathematics dataset directory"
     )
     parser.add_argument(
@@ -299,4 +307,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    main()
