@@ -296,9 +296,9 @@ def main():
         
         # Validate the output
         if processor.validate_output():
-            logger.info("✅ Dataset processing completed successfully!")
+            logger.info("[SUCCESS] Dataset processing completed successfully!")
         else:
-            logger.error("❌ Output validation failed")
+            logger.error("[ERROR] Output validation failed")
             exit(1)
             
     except Exception as e:
@@ -321,7 +321,7 @@ Call stack:
   File "C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\ananta-update\data_processor.py", line 310, in <module>
     main()
   File "C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\ananta-update\data_processor.py", line 301, in main
-    logger.error("❌ Output validation failed")
-Message: '❌ Output validation failed'
+    logger.error("[ERROR] Output validation failed")
+Message: '[ERROR] Output validation failed'
 Arguments: ()
-2025-06-04 14:28:31,838 - ERROR - ❌ Output validation failed"""
+2025-06-04 14:28:31,838 - ERROR - [ERROR] Output validation failed"""
