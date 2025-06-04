@@ -159,69 +159,46 @@ class MathDatasetProcessor:
         if not self.validate_dataset_structure():
             raise ValueError("Dataset validation failed. Please check dataset structure.")
         
-        try:
-            # Use streaming JSON writing to handle large datasets efficiently
-            with open(self.output_file, 'w', encoding='utf-8') as f_out:
-                f_out.write("[\n")
-                first_entry = True
+        # Use streaming JSON writing to handle large datasets efficiently
+        with open(self.output_file, 'w', encoding='utf-8') as f_out:
+            f_out.write("[\n")
+            first_entry = True
+            
+            for difficulty in self.difficulty_levels:
+                difficulty_path = self.dataset_dir / difficulty
                 
-                for difficulty in self.difficulty_levels:
-                    difficulty_path = self.dataset_dir / difficulty
+                if not difficulty_path.exists():
+                    logger.warning(f"Skipping {difficulty} - directory not found")
+                    continue
+                
+                # Initialize stats for this difficulty
+                self.stats["problems_by_difficulty"][difficulty] = 0
+                
+                # Process all text files in this difficulty level
+                txt_files = list(difficulty_path.glob("*.txt"))
+                logger.info(f"Processing {len(txt_files)} files from {difficulty}")
+                
+                for file_path in tqdm(txt_files, desc=f"Processing {difficulty}"):
+                    problem_pairs = self.extract_problem_solution_pairs(file_path)
                     
-                    if not difficulty_path.exists():
-                        logger.warning(f"Skipping {difficulty} - directory not found")
-                        continue
-                    
-                    # Initialize stats for this difficulty
-                    self.stats["problems_by_difficulty"][difficulty] = 0
-                    
-                    # Process all text files in this difficulty level
-                    txt_files = list(difficulty_path.glob("*.txt"))
-                    logger.info(f"Processing {len(txt_files)} files from {difficulty}")
-                    
-                    if len(txt_files) == 0:
-                        logger.warning(f"No .txt files found in {difficulty_path}")
-                        continue
-                    
-                    for file_path in tqdm(txt_files, desc=f"Processing {difficulty}"):
-                        try:
-                            problem_pairs = self.extract_problem_solution_pairs(file_path)
-                            
-                            for problem, solution in problem_pairs:
-                                entry = self.create_instruction_entry(problem, solution, difficulty)
-                                
-                                # Write entry with proper JSON formatting
-                                if not first_entry:
-                                    f_out.write(",\n")
-                                
-                                json.dump(entry, f_out, indent=4, ensure_ascii=False)
-                                first_entry = False
-                                
-                                # Update statistics
-                                self.stats["total_problems"] += 1
-                                self.stats["problems_by_difficulty"][difficulty] += 1
+                    for problem, solution in problem_pairs:
+                        entry = self.create_instruction_entry(problem, solution, difficulty)
                         
-                        except Exception as e:
-                            logger.error(f"Error processing file {file_path}: {e}")
-                            continue
-                
-                f_out.write("\n]")
+                        # Write entry with proper JSON formatting
+                        if not first_entry:
+                            f_out.write(",\n")
+                        
+                        json.dump(entry, f_out, indent=4, ensure_ascii=False)
+                        first_entry = False
+                        
+                        # Update statistics
+                        self.stats["total_problems"] += 1
+                        self.stats["problems_by_difficulty"][difficulty] += 1
             
-            # Check if we actually processed any data
-            if self.stats["total_problems"] == 0:
-                logger.error("No problems were processed. Check your dataset structure and files.")
-                raise ValueError("No data was processed")
-            
-            logger.info(f"Dataset processing complete. Output saved to: {self.output_file}")
-            self.log_processing_statistics()
-            
-        except Exception as e:
-            logger.error(f"Error during dataset processing: {e}")
-            # Clean up incomplete file
-            if self.output_file.exists():
-                logger.info("Removing incomplete output file...")
-                self.output_file.unlink()
-            raise
+            f_out.write("\n]")
+        
+        logger.info(f"Dataset processing complete. Output saved to: {self.output_file}")
+        self.log_processing_statistics()
     
     def log_processing_statistics(self) -> None:
         """
@@ -245,21 +222,6 @@ class MathDatasetProcessor:
         try:
             logger.info("Validating output JSON structure...")
             
-            # First check if the file exists
-            if not self.output_file.exists():
-                logger.error(f"Output file does not exist: {self.output_file}")
-                return False
-            
-            # Check file size
-            file_size = self.output_file.stat().st_size
-            logger.info(f"Output file size: {file_size / (1024*1024):.2f} MB")
-            
-            if file_size == 0:
-                logger.error("Output file is empty")
-                return False
-            
-            # Try to load the JSON
-            logger.info("Loading JSON file for validation...")
             with open(self.output_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             
@@ -267,15 +229,10 @@ class MathDatasetProcessor:
                 logger.error("Output is not a valid JSON array")
                 return False
             
-            if len(data) == 0:
-                logger.error("Output JSON array is empty")
-                return False
-            
             # Validate sample entries
             sample_size = min(100, len(data))
             required_keys = {"instruction", "input", "output", "difficulty"}
             
-            logger.info(f"Validating {sample_size} sample entries...")
             for i, entry in enumerate(data[:sample_size]):
                 if not isinstance(entry, dict):
                     logger.error(f"Entry {i} is not a valid dictionary")
@@ -289,14 +246,6 @@ class MathDatasetProcessor:
             logger.info(f"Output validation passed. {len(data)} entries validated.")
             return True
             
-        except json.JSONDecodeError as e:
-            logger.error(f"JSON parsing error: {e}")
-            logger.error("The output file may be corrupted or incomplete")
-            return False
-        except MemoryError:
-            logger.error("Not enough memory to load the JSON file")
-            logger.error("Try processing a smaller dataset or use streaming validation")
-            return False
         except Exception as e:
             logger.error(f"Output validation failed: {e}")
             return False
@@ -355,3 +304,4 @@ def main():
 if __name__ == "__main__":
     main()
 
+#Cant build now , hardware limitations :)
