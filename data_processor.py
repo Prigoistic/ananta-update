@@ -236,17 +236,12 @@ class MathDatasetProcessor:
             percentage = (count / self.stats["total_problems"]) * 100 if self.stats["total_problems"] > 0 else 0
             logger.info(f"  {difficulty}: {count} problems ({percentage:.1f}%)")
         
-        # Calculate file size for memory planning
+        # calculate file size for memory planning
         file_size_mb = self.output_file.stat().st_size / (1024 * 1024) if self.output_file.exists() else 0
         logger.info(f"\nOutput file size: {file_size_mb:.2f} MB")
     
     def validate_output(self) -> bool:
-        """
-        Validates the generated JSON file structure and content.
-        
-        Returns:
-            bool: True if output validation passes
-        """
+       # for checking the output JSON structure and validating its entries
         try:
             logger.info("Validating output JSON structure...")
             
@@ -345,7 +340,7 @@ def main():
     try:
         processor.process_dataset()
         
-        # Validate the output
+        # fixed the encoding issue by ensureing utf-8 encoding is being used 
         if processor.validate_output():
             logger.info("[SUCCESS] Dataset processing completed successfully!")
         else:
@@ -360,19 +355,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-"""#2025-06-04 14:28:30,856 - ERROR - Output validation failed: 
---- Logging error ---
-Traceback (most recent call last):
-  File "C:\python310\lib\logging\__init__.py", line 1103, in emit
-    stream.write(msg + self.terminator)
-  File "C:\python310\lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 34: character maps to <undefined>
-Call stack:
-  File "C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\ananta-update\data_processor.py", line 310, in <module>
-    main()
-  File "C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\ananta-update\data_processor.py", line 301, in main
-    logger.error("[ERROR] Output validation failed")
-Message: '[ERROR] Output validation failed'
-Arguments: ()
-2025-06-04 14:28:31,838 - ERROR - [ERROR] Output validation failed"""
