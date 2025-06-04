@@ -308,3 +308,20 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""#2025-06-04 14:28:30,856 - ERROR - Output validation failed: 
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\python310\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+  File "C:\python310\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 34: character maps to <undefined>
+Call stack:
+  File "C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\ananta-update\data_processor.py", line 310, in <module>
+    main()
+  File "C:\Users\r0b0t1x\Desktop\pri\Ananta-updated\ananta-update\data_processor.py", line 301, in main
+    logger.error("❌ Output validation failed")
+Message: '❌ Output validation failed'
+Arguments: ()
+2025-06-04 14:28:31,838 - ERROR - ❌ Output validation failed"""
