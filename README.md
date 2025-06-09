@@ -1,6 +1,6 @@
 # Ananta: Scientific LLM Fine-tuning Pipeline
 
-Ananta is a specialized scientific reasoning language model based on DeepSeek-Math-7B, fine-tuned for symbolic mathematics and scientific problem-solving. This repository contains the complete pipeline for data processing, fine-tuning, and deployment.
+Ananta is a specialized scientific reasoning language model based on DeepSeek-Math-7B, fine-tuned for symbolic mathematics and scientific problem-solving. This repository contains the complete pipeline for data processing, fine-tuning, and deployment. Through this initiative we are trying to implement a new LLM architecture, heavily inspired from the Moosbeaur-Poole Algorithm which in short says that, multiply matrixes smarter.
 
 ## 🔬 Project Overview
 
